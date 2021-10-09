@@ -2,10 +2,16 @@
  * Main file for the 2021-22 game - for now, just does Hello World.
  */
 
-#include <iostream>
+#include <gl/window.hpp>
 
 int main(int argc, char ** argv) {
-    /* October 8, 2021 - this is the very beginning of it all. */
-    std::cout << "Hello, World!" << "\n";
-    return 0;
+    
+    gl::Window wn{500, 500};
+    while (wn.is_open()) {
+        // TODO - rendering code goes here
+        wn.clear();
+        wn.render();
+        wn.poll_events(); 
+    }
+
 }
