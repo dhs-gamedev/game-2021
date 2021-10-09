@@ -5,7 +5,7 @@
 #include <iostream>
 
 int main(int argc, char ** argv) {
-    /* October 7, 2021 - this is the very beginning of it all. */
+    /* October 8, 2021 - this is the very beginning of it all. */
     std::cout << "Hello, World!" << "\n";
     return 0;
 }
