@@ -2,6 +2,7 @@
  * Defines a window class for use, based on GLFW.
  */
 
+#include <gl/glad.h>
 #include <GLFW/glfw3.h>
 
 namespace gl {
@@ -16,6 +17,7 @@ public:
     bool is_open();
     
     // Simple inlines
+    inline void clear() { glClear(GL_COLOR_BUFFER_BIT); }
     inline void render() { glfwSwapBuffers(wn); }
     inline void poll_events() { glfwPollEvents(); }
 
