@@ -11,7 +11,7 @@ find_package(glfw3 REQUIRED)
 
 include_directories(${OPENGL_INCLUDE_DIR})
 
-file(GLOB_RECURSE SOURCES src/*.cpp)
+file(GLOB_RECURSE SOURCES src/*.cpp src/gl/glad.c)
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(CMAKE_CXX_FLAGS "-framework OpenGL -Wall -Wno-unused-command-line-argument -g")
