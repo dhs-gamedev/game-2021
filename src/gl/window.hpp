@@ -2,6 +2,8 @@
  * Defines a window class for use, based on GLFW.
  */
 
+#pragma once
+
 #include <gl/glad.h>
 #include <GLFW/glfw3.h>
 

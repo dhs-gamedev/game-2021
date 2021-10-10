@@ -1,8 +1,10 @@
-/**
+/*
  * Header-only - GL contexts and whatnot.
  */
 
-#define GL_SILENCE_DEPRECATION // macOS sayss it's deprecated. WHY?!
+#pragma once
+
+#define GL_SILENCE_DEPRECATION // macOS says it's deprecated. WHY?!
 
 #include <gl/glad.h>
 
