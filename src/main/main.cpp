@@ -6,8 +6,11 @@
 #include <gl/shader.hpp>
 #include <gl/texture.hpp>
 #include <gl/window.hpp>
+#include <main/util.hpp>
 
 int main(int argc, char ** argv) {
+
+	util::log("Game has initialized!", util::Severity::NORMAL);
     
     gl::Window wn{500, 500};
 
