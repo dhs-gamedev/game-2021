@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include <memory>
 #include <string>
 
 #include <gl/glad.h>
@@ -23,5 +24,14 @@ public:
     void unbind(); // Shouldn't need to be used often, actually
 
 };
+
+}
+
+namespace tex {
+
+// More textures here later?
+extern std::unique_ptr<gl::Texture> GROUND_TEX;
+
+void load_all_textures();
 
 }

@@ -3,6 +3,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <gl/stb_image.h>
 
+#include <iostream>
+
 namespace gl {
 
 Texture::Texture(std::string name) {
@@ -40,6 +42,17 @@ void Texture::bind() {
 
 void Texture::unbind() {
     glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+}
+
+namespace tex {
+
+std::unique_ptr<gl::Texture> GROUND_TEX;
+
+void load_all_textures() {
+    GROUND_TEX = std::make_unique<gl::Texture>("res/tex/pixil-frame-0-3.png");
+    // More in the future
 }
 
 }
