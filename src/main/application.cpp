@@ -5,6 +5,7 @@
 #include <gl/mesh.hpp>
 #include <gl/shader.hpp>
 #include <gl/texture.hpp>
+#include <main/util.hpp>
 
 Application::Application()
 : wn (500, 500) {
@@ -33,4 +34,5 @@ void Application::mainloop() {
 
 Application::~Application() {
     // Nothing yet
+    util::log("The application has finished exiting.", util::Severity::NORMAL);
 }

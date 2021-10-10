@@ -10,7 +10,6 @@
 class Application {
 
 private:
-    bool running = true;
     gl::Window wn;
 
 public:
