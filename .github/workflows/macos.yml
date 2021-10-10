@@ -1,0 +1,12 @@
+name: macOS CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: macos-latest
+    name: macOS compilation
+    steps:
+      - uses: actions/checkout@v2
+      - name: deps
+        run: brew install glfw
+      - name: build
+        run: ./scripts/build.sh
