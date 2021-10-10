@@ -3,8 +3,11 @@
  */
 
 #include <main/application.hpp>
+#include <main/util.hpp>
 
 int main(int argc, char ** argv) {
+
+	util::log("Game has initialized!", util::Severity::NORMAL);
     
     Application app{};
     app.mainloop();
