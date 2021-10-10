@@ -3,8 +3,11 @@
  */
 
 #include <gl/window.hpp>
+#include <main/util.hpp>
 
 int main(int argc, char ** argv) {
+
+	util::log("Game has initialized!", util::Severity::NORMAL);
     
     gl::Window wn{500, 500};
     while (wn.is_open()) {
