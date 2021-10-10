@@ -1,0 +1,16 @@
+name: Linux CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Linux compilation
+    steps:
+      - uses: actions/checkout@v2
+      - name: deps
+        run: >
+            sudo cp /etc/apt/sources.list /etc/apt/sources.list~
+            && sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+            && sudo apt-get update
+            && sudo apt-get build-dep glfw3
+      - name: build
+        run: ./scripts/build.sh
