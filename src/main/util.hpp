@@ -1,6 +1,8 @@
 #include <map>
 #include <string>
 
+#pragma once
+
 namespace util {
 
 enum Severity {
@@ -10,9 +12,6 @@ enum Severity {
     WARNING,
     FATAL,
 };
-
-const char *severity_text[] = {
-    "Normal: ", "Debug: ", "Error: ", "Warning: ", "Fatal: "};
 
 int log(std::string message, util::Severity severity);
 
