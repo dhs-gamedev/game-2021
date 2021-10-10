@@ -11,8 +11,8 @@ enum Severity {
     FATAL,
 };
 
-const char *SeverityText[] = {
-    "", "Normal: ", "Debug: ", "Error: ", "Warning: ", "Fatal: "};
+const char *severity_text[] = {
+    "Normal: ", "Debug: ", "Error: ", "Warning: ", "Fatal: "};
 
 int log(std::string message, util::Severity severity);
 
