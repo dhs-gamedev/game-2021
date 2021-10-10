@@ -1,0 +1,13 @@
+name: Windows CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: windows-latest
+    name: Windows compilation
+    steps:
+      - uses: actions/checkout@v2
+      - name: deps
+        run: >
+            vcpkg install glfw3
+      - name: build
+        run: ./scripts/build.sh
