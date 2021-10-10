@@ -11,4 +11,4 @@ int log(std::string message, util::Severity severity) {
 	return 0;
 }
 
-}
+} // namespace util
