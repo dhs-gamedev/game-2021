@@ -15,7 +15,7 @@ Application::Application()
 
 void Application::mainloop() {
     Mesh mesh{
-        std::vector<float>{-0.5f, -0.5f, -0.5f,  0.5f,  0.5f,  0.5f,  0.5f, -0.5f},
+        std::vector<float>{-1.f, -1.f, -1.f,  1.f,  1.f,  1.f,  1.f, -1.f},
         std::vector<int>{0, 1, 3, 3, 1, 2},
         std::vector<float>{0.f, 0.f, 0.f, 1.f, 1.f, 1.f, 1.f, 0.f}
     };
