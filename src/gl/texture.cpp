@@ -51,7 +51,7 @@ namespace tex {
 std::unique_ptr<gl::Texture> GROUND_TEX;
 
 void load_all_textures() {
-    GROUND_TEX = std::make_unique<gl::Texture>("res/tex/pixil-frame-0-3.png");
+    GROUND_TEX = std::make_unique<gl::Texture>("res/tex/background.png");
     // More in the future
 }
 
