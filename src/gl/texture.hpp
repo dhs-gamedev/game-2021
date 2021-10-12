@@ -30,7 +30,9 @@ public:
 namespace tex {
 
 // More textures here later?
-extern std::unique_ptr<gl::Texture> GROUND_TEX;
+extern std::unique_ptr<gl::Texture>
+    GROUND_TEX,
+    PLAYER_TEX;
 
 void load_all_textures();
 
