@@ -16,6 +16,7 @@ protected:
 public:
     Entity(double x, double y);
    ~Entity();
+    virtual void render() = 0;
 
 };
 
