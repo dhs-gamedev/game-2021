@@ -7,6 +7,8 @@
 #include <gl/glad.h>
 #include <GLFW/glfw3.h>
 
+class Application;
+
 namespace gl {
 
 class Window {
@@ -22,6 +24,8 @@ public:
     inline void clear() { glClear(GL_COLOR_BUFFER_BIT); }
     inline void render() { glfwSwapBuffers(wn); }
     inline void poll_events() { glfwPollEvents(); }
+
+friend class ::Application;
 
 };
 
