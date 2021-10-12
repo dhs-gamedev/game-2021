@@ -17,6 +17,11 @@ public:
     Entity(double x, double y);
    ~Entity();
     virtual void render() = 0;
+    // Move by an offset
+    inline void move(double x_off, double y_off) {
+        x += x_off;
+        y += y_off;
+    }
 
 };
 
