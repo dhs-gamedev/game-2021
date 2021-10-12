@@ -59,5 +59,18 @@ void Application::key_callback(
     GLFWwindow * unused1,
     int key_code, int unused2, int action, int modifier_keys
 ) {
-    std::cout << "Key event!\n";
+    if (action == GLFW_PRESS) {
+        switch (key_code) {
+            case GLFW_KEY_A:
+            case GLFW_KEY_LEFT:
+                this->player->move(-0.05, 0);
+                break;
+            case GLFW_KEY_D:
+            case GLFW_KEY_RIGHT:
+                this->player->move( 0.05, 0);
+                break;
+            default:
+                break;
+        }
+    }
 }
