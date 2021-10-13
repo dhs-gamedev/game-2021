@@ -36,4 +36,15 @@ extern std::unique_ptr<gl::Texture>
 
 void load_all_textures();
 
+enum RenderBasis {
+    CENTER,
+    BOTTOM_LEFT,
+};
+
+// Render a texture at a specific spot
+void render_texture(
+    double x, double y, double width, double height,
+    RenderBasis basis, gl::Texture * tex
+);
+
 }

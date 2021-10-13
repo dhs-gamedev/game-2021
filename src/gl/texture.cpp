@@ -3,7 +3,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <gl/stb_image.h>
 
-#include <iostream>
+#include <gl/mesh.hpp>
 
 namespace gl {
 
@@ -54,6 +54,22 @@ std::unique_ptr<gl::Texture> GROUND_TEX,
 void load_all_textures() {
     GROUND_TEX = std::make_unique<gl::Texture>("res/tex/background.png");
     PLAYER_TEX = std::make_unique<gl::Texture>("res/tex/playertemp.png");
+}
+
+void render_texture(
+    double x, double y, double width, double height,
+    RenderBasis basis, gl::Texture * tex) {
+    float xl = (basis == CENTER) ? x - (width / 2) : 0;
+    float xr = (basis == CENTER) ? x + (width / 2) : x + width;
+    float yl = (basis == CENTER) ? y - (width / 2) : 0;
+    float yr = (basis == CENTER) ? y + (width / 2) : y + width;
+    Mesh mesh {
+        std::vector<float>{xl, yl, xl, yr, xr, yr, xr, yl},
+        std::vector<int>{0, 1, 3, 3, 1, 2},
+        std::vector<float>{0.f, 0.f, 0.f, 1.f, 1.f, 1.f, 1.f, 0.f}
+    };
+    tex->bind();
+    mesh.draw();
 }
 
 }
