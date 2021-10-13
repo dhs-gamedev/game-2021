@@ -17,6 +17,8 @@ public:
    ~Player();
     void render() override;
 
+    constexpr static const float WIDTH = 0.2f, HEIGHT = 0.2f;
+
 };
 
 }

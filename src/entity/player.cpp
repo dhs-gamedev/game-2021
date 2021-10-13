@@ -13,7 +13,7 @@ Player::Player(double x, double y, Application * app)
 
 void Player::render() {
     tex::render_texture(
-        x, y, 0.2f, 0.2f, tex::RenderBasis::CENTER, tex::PLAYER_TEX.get()
+        x, y, WIDTH, HEIGHT, tex::RenderBasis::BOTTOM_LEFT, tex::PLAYER_TEX.get()
     );
 }
 
