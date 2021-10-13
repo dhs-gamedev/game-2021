@@ -25,19 +25,16 @@ Application::Application()
 }
 
 void Application::mainloop() {
-    Mesh bg_mesh{
-        std::vector<float>{-1.f, -1.f, -1.f,  1.f,  1.f,  1.f,  1.f, -1.f},
-        std::vector<int>{0, 1, 3, 3, 1, 2},
-        std::vector<float>{0.f, 0.f, 0.f, 1.f, 1.f, 1.f, 1.f, 0.f}
-    };
     gl::GAME_SHADER->bind();
 
     while (wn.is_open()) {
         wn.clear();
 
-        // World rendering
-        tex::GROUND_TEX->bind();
-        bg_mesh.draw();
+        tex::render_texture(
+            0, 0, 2, 2, tex::RenderBasis::CENTER,
+            tex::GROUND_TEX.get()
+        );
+        
         for (auto entity : ent::g_entities) {
             entity->render();
         }
