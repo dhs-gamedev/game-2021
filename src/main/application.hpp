@@ -13,6 +13,7 @@ class Application {
 private:
     gl::Window wn;
     ent::Player * player;
+    void key_callback(GLFWwindow *, int, int, int, int);
 
 public:
     Application();
