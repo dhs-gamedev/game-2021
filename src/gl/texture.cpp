@@ -58,13 +58,37 @@ void load_all_textures() {
 
 void render_texture(
     double x, double y, double width, double height,
-    RenderBasis basis, gl::Texture * tex) {
-    float xl = (basis == CENTER) ? x - (width / 2) : x;
-    float xr = (basis == CENTER) ? x + (width / 2) : x + width;
-    float yl = (basis == CENTER) ? y - (width / 2) : y;
-    float yr = (basis == CENTER) ? y + (width / 2) : y + width;
+    RenderBasis xbasis, RenderBasis ybasis, gl::Texture * tex) {
+    float x_off, y_off;
+    switch (xbasis) {
+        case LOW:
+            x_off = 0;
+            break;
+        case MID:
+            x_off = - width / 2;
+            break;
+        case HI:
+            x_off = - width;
+            break;
+    }
+    switch (ybasis) {
+        case LOW:
+            y_off = 0;
+            break;
+        case MID:
+            y_off = - height / 2;
+            break;
+        case HI:
+            y_off = - height;
+            break;
+    }
     Mesh mesh {
-        std::vector<float>{xl, yl, xl, yr, xr, yr, xr, yl},
+        std::vector<float>{
+            (float) x + x_off,         (float) y + y_off,
+            (float) x + x_off,         (float) y + y_off + (float) height,
+            (float) x + x_off + (float) width, (float) y + y_off + (float) height,
+            (float) x + x_off + (float) width, (float) y + y_off
+        },
         std::vector<int>{0, 1, 3, 3, 1, 2},
         std::vector<float>{0.f, 0.f, 0.f, 1.f, 1.f, 1.f, 1.f, 0.f}
     };

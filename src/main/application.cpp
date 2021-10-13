@@ -31,7 +31,7 @@ void Application::mainloop() {
         wn.clear();
 
         tex::render_texture(
-            0, 0, 2, 2, tex::RenderBasis::CENTER,
+            0, 0, 2, 2, tex::RenderBasis::MID, tex::RenderBasis::MID,
             tex::GROUND_TEX.get()
         );
         
