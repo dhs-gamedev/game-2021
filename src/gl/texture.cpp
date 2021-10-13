@@ -59,9 +59,9 @@ void load_all_textures() {
 void render_texture(
     double x, double y, double width, double height,
     RenderBasis basis, gl::Texture * tex) {
-    float xl = (basis == CENTER) ? x - (width / 2) : 0;
+    float xl = (basis == CENTER) ? x - (width / 2) : x;
     float xr = (basis == CENTER) ? x + (width / 2) : x + width;
-    float yl = (basis == CENTER) ? y - (width / 2) : 0;
+    float yl = (basis == CENTER) ? y - (width / 2) : y;
     float yr = (basis == CENTER) ? y + (width / 2) : y + width;
     Mesh mesh {
         std::vector<float>{xl, yl, xl, yr, xr, yr, xr, yl},
