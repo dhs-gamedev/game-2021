@@ -17,6 +17,7 @@ const char *severity_text[] = {
 
 int log(std::string message, util::Severity severity) {
     std::ofstream out_file(log_file, std::ios::app);
+    std::string msg = severity_text[severity] + message;
     if (!out_file.is_open()) {
         if (!log_file_warning_shown) {
             log_file_warning_shown = true;
@@ -26,11 +27,11 @@ int log(std::string message, util::Severity severity) {
                 , util::Severity::WARNING
             );
         }
+    } else {
+        out_file << msg << std::endl;
     }
-    std::string msg = severity_text[severity] + message;
     if (severity != Severity::DEBUG || debug_to_stdout)
         std::cout << msg << std::endl;
-    out_file << msg << std::endl;
 	return 0;
 }
 
