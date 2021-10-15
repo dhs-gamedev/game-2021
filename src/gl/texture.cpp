@@ -82,12 +82,17 @@ void render_texture(
             y_off = - height;
             break;
     }
+    float
+        xb = (float) x + x_off,
+        yb = (float) y + y_off,
+        wb = (float) width,
+        hb = (float) height;
     Mesh mesh {
         std::vector<float>{
-            (float) x + x_off,         (float) y + y_off,
-            (float) x + x_off,         (float) y + y_off + (float) height,
-            (float) x + x_off + (float) width, (float) y + y_off + (float) height,
-            (float) x + x_off + (float) width, (float) y + y_off
+            xb,      yb,
+            xb,      yb + hb,
+            xb + wb, yb + hb,
+            xb + wb, yb
         },
         std::vector<int>{0, 1, 3, 3, 1, 2},
         std::vector<float>{0.f, 0.f, 0.f, 1.f, 1.f, 1.f, 1.f, 0.f}
