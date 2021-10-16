@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          submodule: recursive
+          submodules: recursive
       - name: deps
         run: brew install glfw
       - name: build
