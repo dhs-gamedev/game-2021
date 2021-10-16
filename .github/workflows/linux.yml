@@ -6,6 +6,8 @@ jobs:
     name: Linux compilation
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: recursive
       - name: deps
         run: >
             sudo cp /etc/apt/sources.list /etc/apt/sources.list~
