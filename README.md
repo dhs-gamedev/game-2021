@@ -20,7 +20,7 @@ Checkout the GLFW submodule with
 git submodule init
 git submodule update
 ```
-.
+
 Then run `./scripts/build.sh`.
 
 ## Run
