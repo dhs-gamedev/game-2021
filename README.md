@@ -16,7 +16,8 @@ necessary to install it separately.
 ## Build
 Checkout the GLFW submodule with
 
-```git submodule init
+```bash
+git submodule init
 git submodule update
 ```
 .
