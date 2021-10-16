@@ -1,5 +1,1 @@
-mkdir -p build
-cd build
-cmake ..
-make
-cd ..
+mkdir -p build && cd build && cmake .. && make && cd ..
