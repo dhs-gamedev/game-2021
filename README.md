@@ -10,8 +10,15 @@ This project wil be done with OpenGL, and as such has the dependencies of OpenGL
 and GLFW. If you are using macOS, the OpenGL component is not required as it
 comes with the installation.
 
+GLFW is packaged as a submodule, and it built along with the game, so it is not
+necessary to install it separately.
+
 ## Build
-`./scripts/build.sh`
+Checkout the GLFW submodule with
+`git submodule init`
+`git submodule update`.
+Then run
+`./scripts/build.sh`.
 
 ## Run
 `./scripts/run.sh`
