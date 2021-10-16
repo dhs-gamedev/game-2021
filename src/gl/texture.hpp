@@ -36,4 +36,21 @@ extern std::unique_ptr<gl::Texture>
 
 void load_all_textures();
 
+/**
+ * What part of the texture the coordinates reference. e.g.: LOW, CENTER means
+ * the x coordinate is the left of the figure and the y coordinate is the middle
+ * of it.
+ */
+enum RenderBasis {
+    LOW,
+    MID,
+    HI
+};
+
+// Render a texture at a specific spot
+void render_texture(
+    double x, double y, double width, double height,
+    RenderBasis xaxis_basis, RenderBasis yaxis_basis, gl::Texture * tex
+);
+
 }

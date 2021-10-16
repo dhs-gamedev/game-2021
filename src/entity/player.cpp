@@ -12,18 +12,11 @@ Player::Player(double x, double y, Application * app)
 }
 
 void Player::render() {
-    tex::PLAYER_TEX->bind();
-    Mesh mesh{
-        std::vector<float>{
-            (float)(x - 0.1f), (float)(y - 0.1f),
-            (float)(x - 0.1f), (float)(y + 0.1f),
-            (float)(x + 0.1f), (float)(y + 0.1f),
-            (float)(x + 0.1f), (float)(y - 0.1f)
-        },
-        std::vector<int>{0, 1, 3, 3, 1, 2},
-        std::vector<float>{0.f, 0.f, 0.f, 1.f, 1.f, 1.f, 1.f, 0.f}
-    };
-    mesh.draw();
+    tex::render_texture(
+        x, y, WIDTH, HEIGHT,
+        tex::RenderBasis::MID, tex::RenderBasis::LOW,
+        tex::PLAYER_TEX.get()
+    );
 }
 
 }
