@@ -12,5 +12,6 @@ jobs:
             && sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
             && sudo apt-get update
             && sudo apt-get build-dep glfw3
+            && ln -s /usr/local/lib/cmake/glfw /usr/local/lib/cmake/glfw3
       - name: build
         run: ./scripts/build.sh
