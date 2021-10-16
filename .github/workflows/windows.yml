@@ -6,8 +6,7 @@ jobs:
     name: Windows compilation
     steps:
       - uses: actions/checkout@v2
-      - name: deps
-        run: >
-            vcpkg install glfw3
+        with:
+          submodule: recursive
       - name: build
         run: ./scripts/build.sh
