@@ -15,9 +15,13 @@ necessary to install it separately.
 
 ## Build
 Checkout the GLFW submodule with
+<br>
 `git submodule init`
+<br>
 `git submodule update`.
+<br>
 Then run
+<br>
 `./scripts/build.sh`.
 
 ## Run
