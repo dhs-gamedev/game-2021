@@ -6,6 +6,8 @@ jobs:
     name: macOS compilation
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodule: recursive
       - name: deps
         run: brew install glfw
       - name: build
