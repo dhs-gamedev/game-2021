@@ -6,9 +6,8 @@ This is the repository for the Davis Senior High School Gamedev game of the
 # Build Instructions
 
 ## Dependencies
-This project will be done with OpenGL, and as such has the dependencies of OpenGL
-and GLFW. If you are using macOS, the OpenGL component is not required as it
-comes with the installation.
+This project will be done with OpenGL, which must be at least version 3.3 on
+your device.
 
 GLFW is packaged as a submodule, and it built along with the game, so it is not
 necessary to install it separately.
