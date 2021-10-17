@@ -53,7 +53,7 @@ std::unique_ptr<gl::Texture> GROUND_TEX,
 
 void load_all_textures() {
     GROUND_TEX = std::make_unique<gl::Texture>("res/tex/background.png");
-    PLAYER_TEX = std::make_unique<gl::Texture>("res/tex/playertemp.png");
+    PLAYER_TEX = std::make_unique<gl::Texture>("res/tex/player-idea.png");
 }
 
 }
