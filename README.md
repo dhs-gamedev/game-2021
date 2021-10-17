@@ -6,7 +6,7 @@ This is the repository for the Davis Senior High School Gamedev game of the
 # Build Instructions
 
 ## Dependencies
-This project wil be done with OpenGL, and as such has the dependencies of OpenGL
+This project will be done with OpenGL, and as such has the dependencies of OpenGL
 and GLFW. If you are using macOS, the OpenGL component is not required as it
 comes with the installation.
 
@@ -21,7 +21,8 @@ git submodule init
 git submodule update
 ```
 
-Then run `./scripts/build.sh`.
+Then run `./scripts/build.sh` for bash, or `.\scripts\build.bat` for cmd/PowerShell.
 
 ## Run
-`./scripts/run.sh`
+The built game is located under `build/` with the name `game21`. Depending on
+your platform, there may be extra folders and/or a suffix after the file name.
