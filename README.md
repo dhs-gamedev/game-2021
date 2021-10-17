@@ -24,4 +24,5 @@ git submodule update
 Then run `./scripts/build.sh` for bash, or `.\scripts\build.bat` for cmd/PowerShell.
 
 ## Run
-The built game is located at `build/game21`. There may be a suffix depending on your OS.
+The built game is located under `build/` with the name `game21`. Depending on
+your platform, there may be extra folders and/or a suffix after the file name.
