@@ -1,3 +1,3 @@
 if not exist "build\" mkdir build\
-cmake -S . -B build/
+cmake -DCMAKE_BUILD_TYPE=Release -S . -B build/
 cmake --build build/
