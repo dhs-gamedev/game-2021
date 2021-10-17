@@ -9,4 +9,4 @@ jobs:
         with:
           submodules: recursive
       - name: build
-        run: ./scripts/build.sh
+        run: ./scripts/build.bat
