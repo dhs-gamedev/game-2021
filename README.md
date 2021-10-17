@@ -21,7 +21,7 @@ git submodule init
 git submodule update
 ```
 
-Then run `./scripts/build.sh`.
+Then run `./scripts/build.sh` for bash, or `.\scripts\build.bat` for cmd/PowerShell.
 
 ## Run
 `./scripts/run.sh`
