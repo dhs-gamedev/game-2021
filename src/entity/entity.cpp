@@ -35,12 +35,18 @@ void update_all_entities() {
             entity->dy / (16 * FRAMERATE)
         );
         // Scuffed floor collision detection
+        // DO NOT replace with is_on_ground(), that would probably render the
+        // player unable to jump
         if (entity->y < FLOOR_HEIGHT) {
             entity->y = FLOOR_HEIGHT;
         }
         // TODO - more?
     }
     affect_all_with_gravity();
+}
+
+bool Entity::is_on_ground() {
+    return this->y <= FLOOR_HEIGHT;
 }
 
 }

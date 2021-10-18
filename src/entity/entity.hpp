@@ -25,6 +25,8 @@ public:
         y += y_off;
     }
 
+    bool is_on_ground();
+
 friend void affect_all_with_gravity();
 friend void update_all_entities();
 
