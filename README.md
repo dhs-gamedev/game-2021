@@ -28,6 +28,6 @@ The built game is located under `build/` with the name `game21`. Depending on
 your platform, there may be extra folders and/or a suffix after the file name.
 
 ## Controls
-A key / left arrow key - left
-D key / right arrow key - right
-Space bar / up arrow key - jump
+- A key / left arrow key - left
+- D key / right arrow key - right
+- Space bar / up arrow key - jump
