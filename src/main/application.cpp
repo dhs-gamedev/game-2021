@@ -21,7 +21,7 @@ Application::Application()
             ((Application*)glfwGetWindowUserPointer(wn))->key_callback(wn, a, b, c, d);
         }
     );
-    new ent::Player(0.0f, 0.0f, this);
+    new ent::Player(0.0f, (18.f/100.f)*2-1, this);
 }
 
 void Application::mainloop() {
