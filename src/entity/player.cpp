@@ -24,4 +24,8 @@ void Player::jump() {
     this->dy = PLAYER_JUMP_SPEED;
 }
 
+void Player::try_to_jump() {
+    if (this->is_on_ground()) this->jump();
+}
+
 }
