@@ -1,5 +1,7 @@
 #include "entity.hpp"
 
+#include <main/application.hpp> // FRAMERATE
+
 namespace ent {
 
 Entity::Entity(double x, double y) {
@@ -18,5 +20,23 @@ Entity::~Entity() {
 }
 
 std::vector<Entity*> g_entities{};
+
+void affect_all_with_gravity() {
+    static const double GRAVITY_STRENGTH = 200.0;
+    for (auto entity : g_entities) {
+        entity->dy -= (GRAVITY_STRENGTH / (16 * FRAMERATE));
+    }
+}
+
+void update_all_entities() {
+    for (auto entity : g_entities) {
+        entity->move(
+            entity->dx / (16 * FRAMERATE),
+            entity->dy / (16 * FRAMERATE)
+        );
+        // TODO - more?
+    }
+    affect_all_with_gravity();
+}
 
 }
