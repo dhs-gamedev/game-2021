@@ -8,6 +8,8 @@
 #include <entity/player.hpp>
 #include <gl/window.hpp>
 
+const extern int FRAMERATE;
+
 class Application {
 
 private:
