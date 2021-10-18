@@ -8,6 +8,9 @@
 #include <entity/player.hpp>
 #include <gl/window.hpp>
 
+const extern int FRAMERATE;
+const extern double FLOOR_HEIGHT;
+
 class Application {
 
 private:

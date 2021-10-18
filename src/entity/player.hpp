@@ -10,6 +10,7 @@ class Player : public Entity {
 
 private:
     Player(double x, double y);
+    void jump();
 
 public:
     // Must be constructed with an application argument
@@ -17,7 +18,9 @@ public:
    ~Player();
     void render() override;
 
-    constexpr static const float WIDTH = 0.2f, HEIGHT = 0.2f;
+    constexpr static const float WIDTH = 0.2f, HEIGHT = 0.3f;
+
+    void try_to_jump();
 
 };
 

@@ -1,5 +1,7 @@
 #include "entity.hpp"
 
+#include <main/application.hpp> // FRAMERATE
+
 namespace ent {
 
 Entity::Entity(double x, double y) {
@@ -18,5 +20,33 @@ Entity::~Entity() {
 }
 
 std::vector<Entity*> g_entities{};
+
+void affect_all_with_gravity() {
+    static const double GRAVITY_STRENGTH = 2000.0;
+    for (auto entity : g_entities) {
+        entity->dy -= (GRAVITY_STRENGTH / (16 * FRAMERATE));
+    }
+}
+
+void update_all_entities() {
+    for (auto entity : g_entities) {
+        entity->move(
+            entity->dx / (16 * FRAMERATE),
+            entity->dy / (16 * FRAMERATE)
+        );
+        // Scuffed floor collision detection
+        // DO NOT replace with is_on_ground(), that would probably render the
+        // player unable to jump
+        if (entity->y < FLOOR_HEIGHT) {
+            entity->y = FLOOR_HEIGHT;
+        }
+        // TODO - more?
+    }
+    affect_all_with_gravity();
+}
+
+bool Entity::is_on_ground() {
+    return this->y <= FLOOR_HEIGHT;
+}
 
 }

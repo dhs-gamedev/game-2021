@@ -1,5 +1,7 @@
 #include "application.hpp"
 
+#include <chrono>
+#include <thread>
 #include <vector>
 
 #include <GLFW/glfw3.h>
@@ -9,6 +11,10 @@
 #include <gl/shader.hpp>
 #include <gl/texture.hpp>
 #include <main/util.hpp>
+
+const int FRAMERATE = 60;
+
+const  double FLOOR_HEIGHT = (18.f/100.f)*2-1;
 
 Application::Application()
 : wn (500, 500) {
@@ -21,13 +27,16 @@ Application::Application()
             ((Application*)glfwGetWindowUserPointer(wn))->key_callback(wn, a, b, c, d);
         }
     );
-    new ent::Player(0.0f, 0.0f, this);
+    new ent::Player(0.0f, FLOOR_HEIGHT, this);
 }
 
 void Application::mainloop() {
     gl::GAME_SHADER->bind();
 
     while (wn.is_open()) {
+
+        auto start_of_frame = std::chrono::steady_clock::now();
+
         wn.clear();
 
         tex::render_texture(
@@ -39,8 +48,17 @@ void Application::mainloop() {
             entity->render();
         }
 
+        ent::update_all_entities();
+
         wn.render();
         wn.poll_events(); 
+
+        std::this_thread::sleep_until(
+            start_of_frame + std::chrono::milliseconds(
+                (int) (1000.f / (float) FRAMERATE)
+            )
+        );
+
     }
 
     tex::GROUND_TEX->unbind();
@@ -64,6 +82,10 @@ void Application::key_callback(
             case GLFW_KEY_D:
             case GLFW_KEY_RIGHT:
                 this->player->move( 0.05, 0);
+                break;
+            case GLFW_KEY_SPACE:
+            case GLFW_KEY_UP:
+                this->player->try_to_jump();
                 break;
             default:
                 break;
