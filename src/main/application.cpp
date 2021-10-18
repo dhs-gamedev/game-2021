@@ -84,7 +84,7 @@ void Application::key_callback(
                 this->player->move( 0.05, 0);
                 break;
             case GLFW_KEY_SPACE:
-                this->player->jump();
+                this->player->try_to_jump();
             default:
                 break;
         }
