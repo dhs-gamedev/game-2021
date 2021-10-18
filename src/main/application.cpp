@@ -14,6 +14,8 @@
 
 const int FRAMERATE = 60;
 
+const  double FLOOR_HEIGHT = (18.f/100.f)*2-1;
+
 Application::Application()
 : wn (500, 500) {
     gl::load_all_shaders();
@@ -25,7 +27,7 @@ Application::Application()
             ((Application*)glfwGetWindowUserPointer(wn))->key_callback(wn, a, b, c, d);
         }
     );
-    new ent::Player(0.0f, (18.f/100.f)*2-1, this);
+    new ent::Player(0.0f, FLOOR_HEIGHT, this);
 }
 
 void Application::mainloop() {
