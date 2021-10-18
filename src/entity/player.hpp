@@ -19,6 +19,8 @@ public:
 
     constexpr static const float WIDTH = 0.2f, HEIGHT = 0.2f;
 
+    void jump();
+
 };
 
 }

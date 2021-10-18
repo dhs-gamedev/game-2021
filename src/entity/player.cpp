@@ -19,4 +19,9 @@ void Player::render() {
     );
 }
 
+void Player::jump() {
+    static const double PLAYER_JUMP_SPEED = 25.0;
+    this->dy = PLAYER_JUMP_SPEED;
+}
+
 }
