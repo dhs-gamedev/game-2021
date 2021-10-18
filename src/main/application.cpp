@@ -46,6 +46,8 @@ void Application::mainloop() {
             entity->render();
         }
 
+        ent::update_all_entities();
+
         wn.render();
         wn.poll_events(); 
 
