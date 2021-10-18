@@ -1,5 +1,7 @@
 #include "application.hpp"
 
+#include <chrono>
+#include <thread>
 #include <vector>
 
 #include <GLFW/glfw3.h>
@@ -9,6 +11,8 @@
 #include <gl/shader.hpp>
 #include <gl/texture.hpp>
 #include <main/util.hpp>
+
+const int FRAMERATE = 60;
 
 Application::Application()
 : wn (500, 500) {
@@ -28,6 +32,9 @@ void Application::mainloop() {
     gl::GAME_SHADER->bind();
 
     while (wn.is_open()) {
+
+        auto start_of_frame = std::chrono::steady_clock::now();
+
         wn.clear();
 
         tex::render_texture(
@@ -41,6 +48,13 @@ void Application::mainloop() {
 
         wn.render();
         wn.poll_events(); 
+
+        std::this_thread::sleep_until(
+            start_of_frame + std::chrono::milliseconds(
+                (int) (1000.f / (float) FRAMERATE)
+            )
+        );
+
     }
 
     tex::GROUND_TEX->unbind();
