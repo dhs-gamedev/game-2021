@@ -34,6 +34,10 @@ void update_all_entities() {
             entity->dx / (16 * FRAMERATE),
             entity->dy / (16 * FRAMERATE)
         );
+        // Scuffed floor collision detection
+        if (entity->y < FLOOR_HEIGHT) {
+            entity->y = FLOOR_HEIGHT;
+        }
         // TODO - more?
     }
     affect_all_with_gravity();
