@@ -8,9 +8,9 @@
 
 #include <gl/glad.h>
 
-// OpenGL 4.1
-#define V_MAJ 4
-#define V_MIN 1
+// OpenGL 3.3
+#define V_MAJ 3
+#define V_MIN 3
 
 #define GL_INIT_CONTEXT() do { \
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, V_MAJ); \
