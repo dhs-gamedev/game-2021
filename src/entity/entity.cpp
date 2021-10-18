@@ -22,7 +22,7 @@ Entity::~Entity() {
 std::vector<Entity*> g_entities{};
 
 void affect_all_with_gravity() {
-    static const double GRAVITY_STRENGTH = 200.0;
+    static const double GRAVITY_STRENGTH = 2000.0;
     for (auto entity : g_entities) {
         entity->dy -= (GRAVITY_STRENGTH / (16 * FRAMERATE));
     }
