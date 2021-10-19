@@ -28,6 +28,6 @@ public:
      */
     StrainLevel calculate_strain(double seconds_in_frame);
     
-}
+};
 
 }
