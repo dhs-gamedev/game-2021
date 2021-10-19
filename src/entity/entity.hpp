@@ -8,16 +8,18 @@
 
 namespace ent {
 
+enum EntityDirection {
+    LEFT,
+    RIGHT,
+};
+
 class Entity {
 
 protected:
     double x, y; // Positions in the world
     // How fast the object is moving, measured in 16ths of the screen PER SEC.
     double dx = 0, dy = 0;
-    enum EntityDirection {
-        LEFT,
-        RIGHT,
-    } direction_facing;
+    EntityDirection direction_facing;
     // Move by an offset
     void change_location(double x_off, double y_off);
 
