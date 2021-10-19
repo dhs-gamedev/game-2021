@@ -48,5 +48,15 @@ void update_all_entities() {
 bool Entity::is_on_ground() {
     return this->y <= FLOOR_HEIGHT;
 }
+void Entity::change_location(double x_off, double y_off) {
+    x += x_off;
+    y += y_off;
+}
+
+void Entity::move(double x_off, double y_off) {
+    this->change_location(x_off, y_off);
+    if (x_off > 0) this->direction_facing = RIGHT;
+    if (x_off < 0) this->direction_facing = LEFT ;
+}
 
 }
