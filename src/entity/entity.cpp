@@ -29,6 +29,7 @@ void affect_all_with_gravity() {
 }
 
 void update_all_entities() {
+    static const double FRICTION = 0.1;
     for (auto entity : g_entities) {
         entity->move(
             entity->dx / (16 * FRAMERATE),
@@ -39,6 +40,10 @@ void update_all_entities() {
         // player unable to jump
         if (entity->y < FLOOR_HEIGHT) {
             entity->y = FLOOR_HEIGHT;
+        }
+        // Do friction!
+        if (entity->is_on_ground()) {
+            entity->dx *= (1.0 - FRICTION);
         }
         // TODO - more?
     }
