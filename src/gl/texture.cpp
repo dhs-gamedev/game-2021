@@ -58,7 +58,9 @@ void load_all_textures() {
 
 void render_texture(
     double x, double y, double width, double height,
-    RenderBasis xbasis, RenderBasis ybasis, gl::Texture * tex) {
+    RenderBasis xbasis, RenderBasis ybasis, gl::Texture * tex,
+    Mirrored flip
+) {
     float x_off, y_off;
     switch (xbasis) {
         case LOW:
@@ -87,6 +89,11 @@ void render_texture(
         yb = (float) y + y_off,
         wb = (float) width,
         hb = (float) height;
+    // Check for mirroring
+    if (flip == Mirrored::MIRRORED) {
+        xb += wb;
+        wb = -wb;
+    }
     Mesh mesh {
         std::vector<float>{
             xb,      yb,
