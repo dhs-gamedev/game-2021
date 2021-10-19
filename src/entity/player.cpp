@@ -32,4 +32,18 @@ void Player::try_to_jump() {
     if (this->is_on_ground()) this->jump();
 }
 
+void Player::try_to_move(EntityDirection dir) {
+    if (this->is_on_ground()) this->move(dir);
+}
+
+void Player::move(EntityDirection dir) {
+
+    if (dir == EntityDirection::LEFT) {
+        this->dx = -SPEED;
+    } else {
+        this->dx =  SPEED;
+    }
+
+}
+
 }

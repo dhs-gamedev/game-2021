@@ -77,11 +77,11 @@ void Application::key_callback(
         switch (key_code) {
             case GLFW_KEY_A:
             case GLFW_KEY_LEFT:
-                this->player->move(-0.05, 0);
+                this->player->try_to_move(ent::EntityDirection::LEFT);
                 break;
             case GLFW_KEY_D:
             case GLFW_KEY_RIGHT:
-                this->player->move( 0.05, 0);
+                this->player->try_to_move(ent::EntityDirection::RIGHT);
                 break;
             case GLFW_KEY_SPACE:
             case GLFW_KEY_UP:
