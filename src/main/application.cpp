@@ -18,7 +18,8 @@ const  double FLOOR_HEIGHT = (18.f/100.f)*2-1;
 
 Application::Application()
 : wn (500, 500) {
-	util::log("Initializing game ...", util::Severity::NORMAL);
+    util::init_log_system();
+	util::log("Initializing application ...", util::Severity::DEBUG);
     gl::load_all_shaders();
     tex::load_all_textures();
     glfwSetWindowUserPointer(wn.wn, this);
@@ -28,8 +29,10 @@ Application::Application()
             ((Application*)glfwGetWindowUserPointer(wn))->key_callback(wn, a, b, c, d);
         }
     );
+    util::log("Application was initialized!", util::Severity::DEBUG);
+    util::log("Initializing game ...", util::Severity::DEBUG);
     new ent::Player(0.0f, FLOOR_HEIGHT, this);
-	util::log("Game has initialized!", util::Severity::NORMAL);
+	util::log("Game was initialized!", util::Severity::NORMAL);
 }
 
 void Application::mainloop() {
@@ -69,6 +72,7 @@ void Application::mainloop() {
 Application::~Application() {
     // Nothing yet
     util::log("The application has finished exiting.", util::Severity::NORMAL);
+    util::cleanup_log_system();
 }
 
 void Application::key_callback(
