@@ -29,7 +29,7 @@ void affect_all_with_gravity() {
 }
 
 void update_all_entities() {
-    static const double FRICTION = 0.1;
+    static const double FRICTION = 0.2;
     for (auto entity : g_entities) {
         entity->move(
             entity->dx / (16 * FRAMERATE),

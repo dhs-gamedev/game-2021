@@ -33,7 +33,7 @@ public:
 
     constexpr static const float WIDTH = 0.2f,
                                  HEIGHT = 0.3f,
-                                 SPEED = 10.0f;
+                                 SPEED = 15.0f;
 
     // Set whether the player will repeatedly do various movements
     void set_jumping(bool);
