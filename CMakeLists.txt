@@ -19,7 +19,7 @@ add_subdirectory(glfw)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(CMAKE_CXX_FLAGS "-framework OpenGL -Wall -Wno-unused-command-line-argument -g")
 else()
-    find_package(OpenGL REQUIRED)
+    find_package(OpenGL 3.3 REQUIRED)
 endif()
 
 add_executable(game21 ${SOURCES})
