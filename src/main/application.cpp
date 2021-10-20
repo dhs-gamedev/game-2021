@@ -48,6 +48,7 @@ void Application::mainloop() {
             entity->render();
         }
 
+        this->player->do_movement();
         ent::update_all_entities();
 
         wn.render();
@@ -73,19 +74,19 @@ void Application::key_callback(
     GLFWwindow * unused1,
     int key_code, int unused2, int action, int modifier_keys
 ) {
-    if (action == GLFW_PRESS) {
+    if (action != GLFW_REPEAT) {
         switch (key_code) {
             case GLFW_KEY_A:
             case GLFW_KEY_LEFT:
-                this->player->move(-0.05, 0);
+                this->player->set_moving_left(action == GLFW_PRESS);
                 break;
             case GLFW_KEY_D:
             case GLFW_KEY_RIGHT:
-                this->player->move( 0.05, 0);
+                this->player->set_moving_right(action == GLFW_PRESS);
                 break;
             case GLFW_KEY_SPACE:
             case GLFW_KEY_UP:
-                this->player->try_to_jump();
+                this->player->set_jumping(action == GLFW_PRESS);
                 break;
             default:
                 break;

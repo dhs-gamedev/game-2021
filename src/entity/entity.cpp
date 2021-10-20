@@ -29,6 +29,7 @@ void affect_all_with_gravity() {
 }
 
 void update_all_entities() {
+    static const double FRICTION = 0.2;
     for (auto entity : g_entities) {
         entity->move(
             entity->dx / (16 * FRAMERATE),
@@ -40,6 +41,10 @@ void update_all_entities() {
         if (entity->y < FLOOR_HEIGHT) {
             entity->y = FLOOR_HEIGHT;
         }
+        // Do friction!
+        if (entity->is_on_ground()) {
+            entity->dx *= (1.0 - FRICTION);
+        }
         // TODO - more?
     }
     affect_all_with_gravity();
@@ -47,6 +52,16 @@ void update_all_entities() {
 
 bool Entity::is_on_ground() {
     return this->y <= FLOOR_HEIGHT;
+}
+void Entity::change_location(double x_off, double y_off) {
+    x += x_off;
+    y += y_off;
+}
+
+void Entity::move(double x_off, double y_off) {
+    this->change_location(x_off, y_off);
+    if (x_off > 0) this->direction_facing = RIGHT;
+    if (x_off < 0) this->direction_facing = LEFT ;
 }
 
 }

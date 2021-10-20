@@ -47,10 +47,17 @@ enum RenderBasis {
     HI
 };
 
+// Whether the texture is rendered normal or mirrored
+enum Mirrored {
+    NORMAL,
+    MIRRORED,
+};
+
 // Render a texture at a specific spot
 void render_texture(
     double x, double y, double width, double height,
-    RenderBasis xaxis_basis, RenderBasis yaxis_basis, gl::Texture * tex
+    RenderBasis xaxis_basis, RenderBasis yaxis_basis, gl::Texture * tex,
+    Mirrored flip = Mirrored::NORMAL
 );
 
 }
