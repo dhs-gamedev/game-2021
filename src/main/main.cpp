@@ -1,5 +1,5 @@
 /**
- * Main file for the 2021-22 game - for now, just does Hello World.
+ * Main file for the 2021-22 game.
  */
 
 #include <main/application.hpp>
