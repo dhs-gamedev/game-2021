@@ -29,7 +29,6 @@ Application::Application()
 }
 
 void Application::mainloop() {
-    gl::GAME_SHADER->bind();
 
     while (wn.is_open()) {
 
@@ -110,6 +109,7 @@ void Application::init_callbacks() {
 
 void Application::init_game() {
     new ent::Player(0.0f, FLOOR_HEIGHT, this);
+    gl::GAME_SHADER->bind();
 }
 
 void Application::exit_game() {
