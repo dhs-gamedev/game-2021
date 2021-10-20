@@ -117,5 +117,5 @@ void Application::exit_game() {
 }
 
 void Application::unload_resources() {
-    // Will add later
+    tex::unload_all_textures();
 }
