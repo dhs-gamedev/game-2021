@@ -1,6 +1,5 @@
 #include "texture.hpp"
 
-#define STB_IMAGE_IMPLEMENTATION
 #include <gl/stb_image.h>
 
 #include <gl/mesh.hpp>
