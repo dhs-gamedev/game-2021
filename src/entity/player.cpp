@@ -46,4 +46,42 @@ void Player::move(EntityDirection dir) {
 
 }
 
+void Player::set_jumping(bool b) {
+    if (b) {
+        this->active_movements |=  move::JUMP;
+    } else {
+        this->active_movements &= ~move::JUMP;
+    }
+}
+
+void Player::set_moving_right(bool b) {
+    if (b) {
+        this->active_movements |=  move::RIGHT;
+        this->active_movements &= ~move::LEFT;
+    } else {
+        this->active_movements &= ~move::RIGHT;
+    }
+}
+
+void Player::set_moving_left(bool b) {
+    if (b) {
+        this->active_movements |=  move::LEFT;
+        this->active_movements &= ~move::RIGHT;
+    } else {
+        this->active_movements &= ~move::LEFT;
+    }
+}
+
+void Player::do_movement() {
+    if (this->active_movements & move::JUMP) {
+        this->try_to_jump();
+    }
+    if (this->active_movements & move::LEFT) {
+        this->try_to_move(EntityDirection::LEFT);
+    }
+    if (this->active_movements & move::RIGHT) {
+        this->try_to_move(EntityDirection::RIGHT);
+    }
+}
+
 }
