@@ -20,18 +20,11 @@ Application::Application()
 : wn (500, 500) {
     util::init_log_system();
 	util::log("Initializing application ...", util::Severity::DEBUG);
-    gl::load_all_shaders();
-    tex::load_all_textures();
-    glfwSetWindowUserPointer(wn.wn, this);
-    glfwSetKeyCallback(
-        wn.wn,
-        [](GLFWwindow * wn, int a, int b, int c, int d) {
-            ((Application*)glfwGetWindowUserPointer(wn))->key_callback(wn, a, b, c, d);
-        }
-    );
+    this->load_resources();
+    this->init_callbacks();
     util::log("Application was initialized!", util::Severity::DEBUG);
     util::log("Initializing game ...", util::Severity::DEBUG);
-    new ent::Player(0.0f, FLOOR_HEIGHT, this);
+    this->init_game();
 	util::log("Game was initialized!", util::Severity::NORMAL);
 }
 
@@ -70,7 +63,8 @@ void Application::mainloop() {
 }
 
 Application::~Application() {
-    // Nothing yet
+    this->exit_game();
+    this->unload_resources();
     util::log("The application has finished exiting.", util::Severity::NORMAL);
     util::cleanup_log_system();
 }
@@ -97,4 +91,31 @@ void Application::key_callback(
                 break;
         }
     }
+}
+
+void Application::load_resources() {
+    gl::load_all_shaders();
+    tex::load_all_textures();
+}
+
+void Application::init_callbacks() {
+    glfwSetWindowUserPointer(wn.wn, this);
+    glfwSetKeyCallback(
+        wn.wn,
+        [](GLFWwindow * wn, int a, int b, int c, int d) {
+            ((Application*)glfwGetWindowUserPointer(wn))->key_callback(wn, a, b, c, d);
+        }
+    );
+}
+
+void Application::init_game() {
+    new ent::Player(0.0f, FLOOR_HEIGHT, this);
+}
+
+void Application::exit_game() {
+    // Nothing yet
+}
+
+void Application::unload_resources() {
+    // Will add later
 }

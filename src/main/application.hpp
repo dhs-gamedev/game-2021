@@ -17,6 +17,11 @@ private:
     gl::Window wn;
     ent::Player * player;
     void key_callback(GLFWwindow *, int, int, int, int);
+    void load_resources();
+    void init_callbacks();
+    void init_game();
+    void exit_game();
+    void unload_resources();
 
 public:
     Application();
