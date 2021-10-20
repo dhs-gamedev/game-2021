@@ -27,6 +27,9 @@ public:
    ~Shader();
     void bind(); // set as active shader
     void unbind();
+    void destroy();
+
+friend void unload_all_shaders();
 
 };
 
@@ -36,5 +39,6 @@ extern std::unique_ptr<Shader> GAME_SHADER; // the basic shader
  * Initialize all shaders (for now just one)
  */
 void load_all_shaders();
+void unload_all_shaders();
 
 }

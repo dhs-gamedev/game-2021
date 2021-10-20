@@ -83,6 +83,13 @@ void Shader::unbind() {
     glUseProgram(0);
 }
 
+void Shader::destroy() {
+    if (this->program_id) {
+        glDeleteShader(this->program_id);
+        this->program_id = 0;
+    }
+}
+
 Shader::~Shader() {
     this->unbind();
     glDeleteShader(this->program_id);
@@ -95,6 +102,10 @@ void load_all_shaders() {
         "src/gl/shad/basic_vert.glsl", "src/gl/shad/basic_frag.glsl"
     );
     // More shaders in the future?
+}
+
+void unload_all_shaders() {
+    GAME_SHADER->destroy();
 }
 
 }

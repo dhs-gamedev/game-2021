@@ -118,4 +118,5 @@ void Application::exit_game() {
 
 void Application::unload_resources() {
     tex::unload_all_textures();
+    gl::unload_all_shaders();
 }
