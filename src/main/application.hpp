@@ -17,8 +17,11 @@ private:
     gl::Window wn;
     ent::Player * player;
     void key_callback(GLFWwindow *, int, int, int, int);
+    // Loading in shaders and textures
     void load_resources();
+    // Add key callback (later mouse callback?)
     void init_callbacks();
+    // Start the game itself (player, etc.)
     void init_game();
     void exit_game();
     void unload_resources();
