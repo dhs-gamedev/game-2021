@@ -18,6 +18,7 @@ const  double FLOOR_HEIGHT = (18.f/100.f)*2-1;
 
 Application::Application()
 : wn (500, 500) {
+	util::log("Initializing game ...", util::Severity::NORMAL);
     gl::load_all_shaders();
     tex::load_all_textures();
     glfwSetWindowUserPointer(wn.wn, this);
@@ -28,6 +29,7 @@ Application::Application()
         }
     );
     new ent::Player(0.0f, FLOOR_HEIGHT, this);
+	util::log("Game has initialized!", util::Severity::NORMAL);
 }
 
 void Application::mainloop() {
