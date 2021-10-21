@@ -4,6 +4,8 @@
 #include <iostream>
 #include <stdlib.h>
 
+#include <gl/glad.h>
+
 #include <main/util.hpp>
 
 namespace {
