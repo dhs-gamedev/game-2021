@@ -31,8 +31,15 @@ Texture::Texture(std::string name) {
 
 }
 
+void Texture::destroy() {
+    if (this->id) {
+        glDeleteTextures(1, &this->id);
+        this->id = 0;
+    }
+}
+
 Texture::~Texture() {
-    glDeleteTextures(1, &this->id);
+    this->destroy();
 }
 
 void Texture::bind() {
@@ -53,6 +60,11 @@ std::unique_ptr<gl::Texture> GROUND_TEX,
 void load_all_textures() {
     GROUND_TEX = std::make_unique<gl::Texture>("res/tex/background.png");
     PLAYER_TEX = std::make_unique<gl::Texture>("res/tex/player-idea.png");
+}
+
+void unload_all_textures() {
+    GROUND_TEX->destroy();
+    PLAYER_TEX->destroy();
 }
 
 void render_texture(

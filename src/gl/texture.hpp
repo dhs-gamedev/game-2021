@@ -22,6 +22,7 @@ public:
    ~Texture();
     void bind(); // Make this the currently drawn texture
     void unbind(); // Shouldn't need to be used often, actually
+    void destroy();
 
 };
 
@@ -35,6 +36,7 @@ extern std::unique_ptr<gl::Texture>
     PLAYER_TEX;
 
 void load_all_textures();
+void unload_all_textures();
 
 /**
  * What part of the texture the coordinates reference. e.g.: LOW, CENTER means

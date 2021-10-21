@@ -30,3 +30,6 @@ your platform, there may be extra folders and/or a suffix after the file name.
 - A key / left arrow key - left
 - D key / right arrow key - right
 - Space bar / up arrow key - jump
+
+## For Coders
+The main method is in `src/main/main.cpp` if you want to start exploring there.
