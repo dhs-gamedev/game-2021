@@ -111,6 +111,7 @@ void Application::init_callbacks() {
 void Application::init_game() {
     new ent::Player(0.0f, FLOOR_HEIGHT, this);
     gl::GAME_SHADER->bind();
+    util::log("Teo was here!", util::Severity::NORMAL);
 }
 
 void Application::exit_game() {
