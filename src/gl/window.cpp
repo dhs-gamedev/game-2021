@@ -19,7 +19,11 @@ Window::Window() {
 #endif
 
     this->wn = glfwCreateWindow(
+#ifdef __linux__
+        vm->width, vm->height,
+#else
         500, 500,
+#endif
         "Game 2021-22",
         nullptr,
         nullptr
