@@ -20,7 +20,13 @@ Window::Window() {
 #else
         500, 500,
 #endif
-        "Game 2021-22", monitor, nullptr);
+        "Game 2021-22",
+#ifdef __linux__
+        monitor,
+#else
+        nullptr,
+#endif
+        nullptr);
 
     glfwMakeContextCurrent(this->wn);
     gladLoadGL();
