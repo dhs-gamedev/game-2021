@@ -28,6 +28,9 @@ private:
     void exit_game();
     void unload_resources();
 
+    // For redrawing the screen
+    void redraw();
+
 public:
     Application();
    ~Application();
