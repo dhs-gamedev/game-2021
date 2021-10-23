@@ -17,7 +17,7 @@ const int FRAMERATE = 60;
 const  double FLOOR_HEIGHT = (18.f/100.f)*2-1;
 
 Application::Application()
-: wn (500, 500) {
+: wn () {
     util::init_log_system();
 	util::log("Initializing application ...", util::Severity::DEBUG);
     this->load_resources();

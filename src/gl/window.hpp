@@ -16,7 +16,7 @@ class Window {
     GLFWwindow * wn;
 
 public:
-    Window(int width, int height);
+    Window();
    ~Window();
     bool is_open();
     
