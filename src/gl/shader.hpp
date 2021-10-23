@@ -4,10 +4,11 @@
 
 #pragma once
 
-#include <gl/glad.h>
-
+#include <map>
 #include <memory>
 #include <string>
+
+#include <gl/glad.h>
 
 namespace gl {
 
@@ -21,13 +22,20 @@ private:
     // Finalize the shader.
     void link(int vert, int frag);
 
+    // All uniforms.
+    std::map<std::string, int> uniforms;
+
 public:
     // Take in the file paths.
     Shader(const char* vertex_path, const char* fragment_path);
    ~Shader();
+
     void bind(); // set as active shader
     void unbind();
     void destroy();
+
+    void register_uniform(std::string name);
+    void set_uniform_value(std::string name, float value);
 
 friend void unload_all_shaders();
 

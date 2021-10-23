@@ -4,6 +4,7 @@
 #include <string>
 
 #include <gl/glad.h>
+#include <main/util.hpp>
 
 namespace {
 
@@ -93,6 +94,18 @@ void Shader::destroy() {
 Shader::~Shader() {
     this->unbind();
     glDeleteShader(this->program_id);
+}
+
+void Shader::register_uniform(std::string name) {
+    int loc = glGetUniformLocation(this->program_id, name.c_str());
+    if (loc < 0) {
+        util::log("Could not find uniform: " + name, util::Severity::FATAL);
+    }
+    this->uniforms[name] = loc;
+}
+
+void Shader::set_uniform_value(std::string name, float value) {
+    glUniform1f(this->uniforms[name], value);
 }
 
 std::unique_ptr<Shader> GAME_SHADER;
