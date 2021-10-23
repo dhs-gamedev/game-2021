@@ -93,6 +93,11 @@ void Application::key_callback(
     }
 }
 
+void Application::update_size(GLFWwindow * window, int width, int height) {
+    // Update the shader uniform for size
+    gl::GAME_SHADER->set_uniform_value("ratio", ((float) width) / ((float) height));
+}
+
 void Application::load_resources() {
     gl::load_all_shaders();
     tex::load_all_textures();
@@ -106,11 +111,21 @@ void Application::init_callbacks() {
             ((Application*)glfwGetWindowUserPointer(wn))->key_callback(wn, a, b, c, d);
         }
     );
+    glfwSetWindowSizeCallback(
+        wn.wn,
+        [](GLFWwindow * wn, int width, int height) {
+            ((Application*)glfwGetWindowUserPointer(wn))->update_size(wn, width, height);
+        }
+    );
 }
 
 void Application::init_game() {
     new ent::Player(0.0f, FLOOR_HEIGHT, this);
     gl::GAME_SHADER->bind();
+    gl::GAME_SHADER->register_uniform("ratio");
+    gl::GAME_SHADER->set_uniform_value("ratio", 1.0f);
+    // Now that the shaders are set up, the window can be resized.
+    glfwSetWindowAttrib(this->wn.wn, GLFW_RESIZABLE, GLFW_TRUE);
 }
 
 void Application::exit_game() {
