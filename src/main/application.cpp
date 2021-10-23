@@ -130,9 +130,12 @@ void Application::init_game() {
     new ent::Player(0.0f, FLOOR_HEIGHT, this);
     gl::GAME_SHADER->bind();
     gl::GAME_SHADER->register_uniform("ratio");
-    gl::GAME_SHADER->set_uniform_value("ratio", 1.0f);
-    // Now that the shaders are set up, the window can be resized.
-    glfwSetWindowAttrib(this->wn.wn, GLFW_RESIZABLE, GLFW_TRUE);
+
+    // Update size
+    int w, h;
+    glfwGetWindowSize(this->wn.wn, &w, &h);
+    this->update_size(this->wn.wn, w, h);
+
     util::log("Teo was here!", util::Severity::NORMAL);
 }
 
