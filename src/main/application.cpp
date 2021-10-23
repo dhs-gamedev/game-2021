@@ -34,21 +34,10 @@ void Application::mainloop() {
 
         auto start_of_frame = std::chrono::steady_clock::now();
 
-        wn.clear();
-
-        tex::render_texture(
-            0, 0, 2, 2, tex::RenderBasis::MID, tex::RenderBasis::MID,
-            tex::GROUND_TEX.get()
-        );
-        
-        for (auto entity : ent::g_entities) {
-            entity->render();
-        }
+        this->redraw();
 
         this->player->do_movement();
         ent::update_all_entities();
-
-        wn.render();
         wn.poll_events(); 
 
         std::this_thread::sleep_until(
@@ -59,7 +48,6 @@ void Application::mainloop() {
 
     }
 
-    tex::GROUND_TEX->unbind();
 }
 
 Application::~Application() {
@@ -93,6 +81,30 @@ void Application::key_callback(
     }
 }
 
+void Application::update_size(GLFWwindow * window, int width, int height) {
+    // Update the shader uniform for size
+    gl::GAME_SHADER->set_uniform_value("ratio", ((float) width) / ((float) height));
+    // Redraw the screen so it doesn't stall.
+    this->redraw();
+}
+
+void Application::redraw() {
+        
+    wn.clear();
+
+    tex::render_texture(
+        0, 0, 2, 2, tex::RenderBasis::MID, tex::RenderBasis::MID,
+        tex::GROUND_TEX.get()
+    );
+    
+    for (auto entity : ent::g_entities) {
+        entity->render();
+    }
+
+    wn.render();
+    
+}
+
 void Application::load_resources() {
     gl::load_all_shaders();
     tex::load_all_textures();
@@ -106,11 +118,21 @@ void Application::init_callbacks() {
             ((Application*)glfwGetWindowUserPointer(wn))->key_callback(wn, a, b, c, d);
         }
     );
+    glfwSetWindowSizeCallback(
+        wn.wn,
+        [](GLFWwindow * wn, int width, int height) {
+            ((Application*)glfwGetWindowUserPointer(wn))->update_size(wn, width, height);
+        }
+    );
 }
 
 void Application::init_game() {
     new ent::Player(0.0f, FLOOR_HEIGHT, this);
     gl::GAME_SHADER->bind();
+    gl::GAME_SHADER->register_uniform("ratio");
+    gl::GAME_SHADER->set_uniform_value("ratio", 1.0f);
+    // Now that the shaders are set up, the window can be resized.
+    glfwSetWindowAttrib(this->wn.wn, GLFW_RESIZABLE, GLFW_TRUE);
     util::log("Teo was here!", util::Severity::NORMAL);
 }
 
