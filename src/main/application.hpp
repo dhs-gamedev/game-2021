@@ -31,10 +31,14 @@ private:
     // For redrawing the screen
     void redraw();
 
+    // For cleanly shutting down the game
+    bool running = true;
+
 public:
     Application();
    ~Application();
     void mainloop();
+    void close();
 
 friend class ent::Player;
 
