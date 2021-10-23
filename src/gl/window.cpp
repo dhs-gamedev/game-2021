@@ -6,27 +6,24 @@ namespace gl {
 
 Window::Window() {
 
+#if defined(__APPLE__) || defined(__linux__)
+    #define FULLSCREEN_SUPPORTED // We want to see where fullscreen is allowed
+#endif // __APPLE__ || __linux__
+
     glfwInit();
 
     GL_INIT_CONTEXT();
-#ifdef __linux__
+#ifdef FULLSCREEN_SUPPORTED
     auto monitor = glfwGetPrimaryMonitor();
     auto vm = glfwGetVideoMode(monitor);
 #endif
 
     this->wn = glfwCreateWindow(
-#ifdef __linux__
-        vm->width, vm->height,
-#else
         500, 500,
-#endif
         "Game 2021-22",
-#ifdef __linux__
-        monitor,
-#else
         nullptr,
-#endif
-        nullptr);
+        nullptr
+    );
 
     glfwMakeContextCurrent(this->wn);
     gladLoadGL();
@@ -34,8 +31,16 @@ Window::Window() {
     // Test - apocalyptic gray
     glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
 
-    // Set window as non-resizable until the shaders are done being set up.
+#ifdef __APPLE__
+    glfwSetWindowAttrib(this->wn, GLFW_AUTO_ICONIFY, GLFW_FALSE);
+    glfwFocusWindow(this->wn);
+#endif
+
+#ifdef FULLSCREEN_SUPPORTED
+    glfwSetWindowMonitor(this->wn, monitor, 0, 0, vm->width, vm->height, vm->refreshRate);
     glfwSetWindowAttrib(this->wn, GLFW_RESIZABLE, GLFW_FALSE);
+#endif
+
 }
 
 Window::~Window() {

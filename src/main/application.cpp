@@ -30,7 +30,7 @@ Application::Application()
 
 void Application::mainloop() {
 
-    while (wn.is_open()) {
+    while (wn.is_open() && this->running) {
 
         auto start_of_frame = std::chrono::steady_clock::now();
 
@@ -75,10 +75,16 @@ void Application::key_callback(
             case GLFW_KEY_UP:
                 this->player->set_jumping(action == GLFW_PRESS);
                 break;
+            case GLFW_KEY_ESCAPE:
+                this->close();
             default:
                 break;
         }
     }
+}
+
+void Application::close() {
+    this->running = false;
 }
 
 void Application::update_size(GLFWwindow * window, int width, int height) {
@@ -130,9 +136,12 @@ void Application::init_game() {
     new ent::Player(0.0f, FLOOR_HEIGHT, this);
     gl::GAME_SHADER->bind();
     gl::GAME_SHADER->register_uniform("ratio");
-    gl::GAME_SHADER->set_uniform_value("ratio", 1.0f);
-    // Now that the shaders are set up, the window can be resized.
-    glfwSetWindowAttrib(this->wn.wn, GLFW_RESIZABLE, GLFW_TRUE);
+
+    // Update size
+    int w, h;
+    glfwGetWindowSize(this->wn.wn, &w, &h);
+    this->update_size(this->wn.wn, w, h);
+
     util::log("Teo was here!", util::Severity::NORMAL);
 }
 
