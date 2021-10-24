@@ -20,6 +20,6 @@ public:
 
     void draw(const std::string& text, float x, float y, float scale);
 
-}
+};
 
 }
