@@ -102,7 +102,7 @@ void load_all_shaders() {
         "src/gl/shad/basic_vert.glsl", "src/gl/shad/basic_frag.glsl"
     );
     TEXT_SHADER = std::make_unique<Shader>(
-        "src/gl/shad/text_vert.glsl",  "src/gl/shad/basic_frag.glsl"
+        "src/gl/shad/basic_vert.glsl", "src/gl/shad/text_frag.glsl"
     );
 }
 
