@@ -19,7 +19,7 @@ private:
     stbtt_fontinfo info;
 
 public:
-     Font(const std::string& font_path, int font_size);
+     Font(const std::string& font_path);
     ~Font();
 
     void draw(const std::string& text, float x, float y, float scale);
@@ -36,6 +36,7 @@ private:
 
 public:
      TextLabel(const std::string& text, const Font& font);
+     TextLabel() = delete;
     ~TextLabel();
 
     void draw(float x, float y, float xs, float ys);

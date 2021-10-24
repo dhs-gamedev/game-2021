@@ -11,7 +11,7 @@
 
 namespace gl {
 
-Font::Font(const std::string& font_path, int font_size) {
+Font::Font(const std::string& font_path) {
 
     FILE          * file = fopen(font_path.c_str(), "r");
     if (!file) {
@@ -50,7 +50,7 @@ TextLabel::TextLabel(const std::string& text_s, const Font& font) {
     int l_h = 64; /* line height */
 
     /* create a bitmap for the phrase */
-    unsigned char* bitmap = (unsigned char *) calloc(b_w * b_h, sizeof(unsigned char));
+    bitmap = (unsigned char *) calloc(b_w * b_h, sizeof(unsigned char));
     
     /* calculate font scaling */
     float scale = stbtt_ScaleForPixelHeight(&(font.info), l_h);
@@ -100,7 +100,7 @@ TextLabel::TextLabel(const std::string& text_s, const Font& font) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, b_w, b_h, 0, GL_RGBA, GL_UNSIGNED_BYTE, font.fontbuf);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, 512, 128, 0, GL_RED, GL_UNSIGNED_BYTE, bitmap);
 
     glGenerateMipmap(GL_TEXTURE_2D);
 
