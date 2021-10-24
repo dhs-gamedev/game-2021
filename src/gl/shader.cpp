@@ -110,8 +110,6 @@ void Shader::set_uniform_value(std::string name, float value) {
     glUniform1f(this->uniforms[name], value);
 }
 
-std::unique_ptr<Shader> GAME_SHADER;
-
 void load_all_shaders() {
     GAME_SHADER = std::make_unique<Shader>(
         "src/gl/shad/basic_vert.glsl", "src/gl/shad/basic_frag.glsl"
