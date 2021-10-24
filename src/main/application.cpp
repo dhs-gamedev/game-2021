@@ -7,6 +7,7 @@
 #include <GLFW/glfw3.h>
 
 #include <entity/entity.hpp>
+#include <gl/glad.h>
 #include <gl/mesh.hpp>
 #include <gl/shader.hpp>
 #include <gl/texture.hpp>
@@ -144,9 +145,12 @@ void Application::init_callbacks() {
 }
 
 void Application::init_game() {
+
     new ent::Player(0.0f, FLOOR_HEIGHT, this);
     gl::GAME_SHADER->bind();
     gl::GAME_SHADER->register_uniform("ratio");
+
+    glEnable(GL_BLEND);
 
     // Update size
     int w, h;
@@ -154,6 +158,7 @@ void Application::init_game() {
     this->update_size(this->wn.wn, w, h);
 
     util::log("Teo was here!", util::Severity::NORMAL);
+
 }
 
 void Application::exit_game() {
