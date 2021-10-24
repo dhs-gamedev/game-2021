@@ -115,7 +115,7 @@ void TextLabel::draw(float x, float y, float w, float h) {
     glBindTexture(GL_TEXTURE_2D, this->id);
     Mesh mesh {
         std::vector<float>{
-            x, y, x, y + h, x + w, y + h, x + w, y
+            x, y + h, x, y, x + w, y, x + w, y + h
         },
         std::vector<int>{0, 1, 3, 3, 1, 2},
         std::vector<float>{0.f, 0.f, 0.f, 1.f, 1.f, 1.f, 1.f, 0.f}
