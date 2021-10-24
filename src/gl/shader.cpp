@@ -95,7 +95,7 @@ Shader::~Shader() {
     glDeleteShader(this->program_id);
 }
 
-std::unique_ptr<Shader> GAME_SHADER;
+std::unique_ptr<Shader> GAME_SHADER, TEXT_SHADER;
 
 void load_all_shaders() {
     GAME_SHADER = std::make_unique<Shader>(
