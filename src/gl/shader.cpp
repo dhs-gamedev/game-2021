@@ -1,5 +1,6 @@
 #include "shader.hpp"
 
+#include <iostream>
 #include <stdio.h>
 #include <string>
 
@@ -59,8 +60,7 @@ int Shader::create_subshader(const GLchar* code, int type) {
         // Check for error - if so, ...
         GLchar errorbuf[512];
         glGetShaderInfoLog(id, 512, nullptr, errorbuf);
-        // std::cerr << std::string(errorbuf) << "\n";
-        // TODO - use log
+        std::cerr << std::string(errorbuf) << "\n";
     }
 
     return id;
