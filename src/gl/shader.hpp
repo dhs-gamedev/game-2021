@@ -33,7 +33,8 @@ friend void unload_all_shaders();
 
 };
 
-extern std::unique_ptr<Shader> GAME_SHADER; // the basic shader
+extern std::unique_ptr<Shader> GAME_SHADER, // the basic shader
+                               TEXT_SHADER;
 
 /**
  * Initialize all shaders (for now just one)
