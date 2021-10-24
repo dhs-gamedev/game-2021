@@ -30,6 +30,10 @@ Application::Application()
 
 void Application::mainloop() {
 
+    gl::Font font{"res/fonts/Arial.ttf"};
+    gl::TextLabel label{"Hello World!", font};
+    labels.push_back(&label);
+
     while (wn.is_open() && this->running) {
 
         auto start_of_frame = std::chrono::steady_clock::now();
@@ -98,6 +102,8 @@ void Application::redraw() {
         
     wn.clear();
 
+    gl::GAME_SHADER->bind();
+
     tex::render_texture(
         0, 0, 2, 2, tex::RenderBasis::MID, tex::RenderBasis::MID,
         tex::GROUND_TEX.get()
@@ -105,6 +111,11 @@ void Application::redraw() {
     
     for (auto entity : ent::g_entities) {
         entity->render();
+    }
+
+    gl::TEXT_SHADER->bind();
+    for (auto label : labels) {
+        label->draw(0, 0, 0.4, 0.4);
     }
 
     wn.render();
