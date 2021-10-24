@@ -17,6 +17,8 @@ private:
     gl::Window wn;
     ent::Player * player;
     void key_callback(GLFWwindow *, int, int, int, int);
+    // When the window is resized
+    void update_size(GLFWwindow *, int, int);
     // Loading in shaders and textures
     void load_resources();
     // Add key callback (later mouse callback?)
@@ -26,10 +28,17 @@ private:
     void exit_game();
     void unload_resources();
 
+    // For redrawing the screen
+    void redraw();
+
+    // For cleanly shutting down the game
+    bool running = true;
+
 public:
     Application();
    ~Application();
     void mainloop();
+    void close();
 
 friend class ent::Player;
 

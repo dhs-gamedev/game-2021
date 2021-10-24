@@ -17,7 +17,7 @@ const int FRAMERATE = 60;
 const  double FLOOR_HEIGHT = (18.f/100.f)*2-1;
 
 Application::Application()
-: wn (500, 500) {
+: wn () {
     util::init_log_system();
 	util::log("Initializing application ...", util::Severity::DEBUG);
     this->load_resources();
@@ -30,25 +30,14 @@ Application::Application()
 
 void Application::mainloop() {
 
-    while (wn.is_open()) {
+    while (wn.is_open() && this->running) {
 
         auto start_of_frame = std::chrono::steady_clock::now();
 
-        wn.clear();
-
-        tex::render_texture(
-            0, 0, 2, 2, tex::RenderBasis::MID, tex::RenderBasis::MID,
-            tex::GROUND_TEX.get()
-        );
-        
-        for (auto entity : ent::g_entities) {
-            entity->render();
-        }
+        this->redraw();
 
         this->player->do_movement();
         ent::update_all_entities();
-
-        wn.render();
         wn.poll_events(); 
 
         std::this_thread::sleep_until(
@@ -59,7 +48,6 @@ void Application::mainloop() {
 
     }
 
-    tex::GROUND_TEX->unbind();
 }
 
 Application::~Application() {
@@ -87,10 +75,40 @@ void Application::key_callback(
             case GLFW_KEY_UP:
                 this->player->set_jumping(action == GLFW_PRESS);
                 break;
+            case GLFW_KEY_ESCAPE:
+                this->close();
             default:
                 break;
         }
     }
+}
+
+void Application::close() {
+    this->running = false;
+}
+
+void Application::update_size(GLFWwindow * window, int width, int height) {
+    // Update the shader uniform for size
+    gl::GAME_SHADER->set_uniform_value("ratio", ((float) width) / ((float) height));
+    // Redraw the screen so it doesn't stall.
+    this->redraw();
+}
+
+void Application::redraw() {
+        
+    wn.clear();
+
+    tex::render_texture(
+        0, 0, 2, 2, tex::RenderBasis::MID, tex::RenderBasis::MID,
+        tex::GROUND_TEX.get()
+    );
+    
+    for (auto entity : ent::g_entities) {
+        entity->render();
+    }
+
+    wn.render();
+    
 }
 
 void Application::load_resources() {
@@ -106,11 +124,25 @@ void Application::init_callbacks() {
             ((Application*)glfwGetWindowUserPointer(wn))->key_callback(wn, a, b, c, d);
         }
     );
+    glfwSetWindowSizeCallback(
+        wn.wn,
+        [](GLFWwindow * wn, int width, int height) {
+            ((Application*)glfwGetWindowUserPointer(wn))->update_size(wn, width, height);
+        }
+    );
 }
 
 void Application::init_game() {
     new ent::Player(0.0f, FLOOR_HEIGHT, this);
     gl::GAME_SHADER->bind();
+    gl::GAME_SHADER->register_uniform("ratio");
+
+    // Update size
+    int w, h;
+    glfwGetWindowSize(this->wn.wn, &w, &h);
+    this->update_size(this->wn.wn, w, h);
+
+    util::log("Teo was here!", util::Severity::NORMAL);
 }
 
 void Application::exit_game() {
