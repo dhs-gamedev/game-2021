@@ -77,6 +77,8 @@ void Shader::link(int vert, int frag) {
     // We no longer need these sub-shaders.
     glDetachShader(this->program_id, vert);
     glDetachShader(this->program_id, frag);
+    glDeleteShader(vert);
+    glDeleteShader(frag);
 }
 
 void Shader::bind() {
