@@ -22,6 +22,7 @@ const GLchar* load_file_as_string(const char* path) {
     for (int pos = 0; pos < len; ++pos) {
         code[pos] = getc(fp);
     }
+    fclose(fp);
     code[len] = 0;
     return code;
 }
@@ -49,7 +50,9 @@ Shader::Shader(const char* vertex_path, const char* fragment_path) {
 int Shader::create_subshader(const GLchar* code, int type) {
 
     int id = glCreateShader(type);
-    // TODO - check if id == 0
+    if (!id) {
+        util::log("Failed to create shader", util::Severity::FATAL);
+    }
 
     glShaderSource(id, 1, &code, nullptr);
     glCompileShader(id);
