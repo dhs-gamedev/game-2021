@@ -149,9 +149,11 @@ void Application::init_callbacks() {
 void Application::init_game() {
 
     new ent::Player(0.0f, FLOOR_HEIGHT, this);
-    gl::GAME_SHADER->bind();
 
+    gl::GAME_SHADER->bind();
     gl::GAME_SHADER->register_uniform("ratio");
+
+    gl::TEXT_SHADER->bind();
     gl::TEXT_SHADER->register_uniform("ratio");
 
     glEnable(GL_BLEND);
