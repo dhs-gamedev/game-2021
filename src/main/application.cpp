@@ -95,7 +95,9 @@ void Application::close() {
 void Application::update_size(GLFWwindow * window, int width, int height) {
     // Update the shader uniform for size
     auto ratio = ((float) width) / ((float) height);
+    gl::GAME_SHADER->bind();
     gl::GAME_SHADER->set_uniform_value("ratio", ratio);
+    gl::TEXT_SHADER->bind();
     gl::TEXT_SHADER->set_uniform_value("ratio", ratio);
     // Redraw the screen so it doesn't stall.
     this->redraw();
