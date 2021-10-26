@@ -94,7 +94,9 @@ void Application::close() {
 
 void Application::update_size(GLFWwindow * window, int width, int height) {
     // Update the shader uniform for size
-    gl::GAME_SHADER->set_uniform_value("ratio", ((float) width) / ((float) height));
+    auto ratio = ((float) width) / ((float) height);
+    gl::GAME_SHADER->set_uniform_value("ratio", ratio);
+    gl::TEXT_SHADER->set_uniform_value("ratio", ratio);
     // Redraw the screen so it doesn't stall.
     this->redraw();
 }
@@ -148,7 +150,9 @@ void Application::init_game() {
 
     new ent::Player(0.0f, FLOOR_HEIGHT, this);
     gl::GAME_SHADER->bind();
+
     gl::GAME_SHADER->register_uniform("ratio");
+    gl::TEXT_SHADER->register_uniform("ratio");
 
     glEnable(GL_BLEND);
 
