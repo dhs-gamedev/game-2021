@@ -6,6 +6,6 @@ uniform sampler2D tex;
 
 void main() {
     vec4 inter = texture(tex, texCoord);
-    fragColor = vec4(inter.r, inter.r, inter.r, 1.0);
-    if (fragColor.r < 0.05) discard;
+    if (inter.r < 0.05) discard;
+    fragColor = vec4(0.0, 0.0, 0.0, 1.0);
 }
