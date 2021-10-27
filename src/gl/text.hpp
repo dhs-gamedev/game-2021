@@ -7,6 +7,7 @@
 #include <string>
 
 #include <gl/stb_truetype.h>
+#include <gl/texture.hpp>
 
 namespace gl {
 
@@ -27,7 +28,7 @@ friend class TextLabel;
 
 };
 
-class TextLabel {
+class TextLabel : public Texture {
     
 private:
     DataBuffer bitmap;
