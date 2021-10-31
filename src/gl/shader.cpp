@@ -1,5 +1,6 @@
 #include "shader.hpp"
 
+#include <iostream>
 #include <stdio.h>
 #include <string>
 
@@ -21,6 +22,7 @@ const GLchar* load_file_as_string(const char* path) {
     for (int pos = 0; pos < len; ++pos) {
         code[pos] = getc(fp);
     }
+    fclose(fp);
     code[len] = 0;
     return code;
 }
@@ -48,7 +50,9 @@ Shader::Shader(const char* vertex_path, const char* fragment_path) {
 int Shader::create_subshader(const GLchar* code, int type) {
 
     int id = glCreateShader(type);
-    // TODO - check if id == 0
+    if (!id) {
+        util::log("Failed to create shader", util::Severity::FATAL);
+    }
 
     glShaderSource(id, 1, &code, nullptr);
     glCompileShader(id);
@@ -59,8 +63,7 @@ int Shader::create_subshader(const GLchar* code, int type) {
         // Check for error - if so, ...
         GLchar errorbuf[512];
         glGetShaderInfoLog(id, 512, nullptr, errorbuf);
-        // std::cerr << std::string(errorbuf) << "\n";
-        // TODO - use log
+        std::cerr << std::string(errorbuf) << "\n";
     }
 
     return id;
@@ -74,6 +77,8 @@ void Shader::link(int vert, int frag) {
     // We no longer need these sub-shaders.
     glDetachShader(this->program_id, vert);
     glDetachShader(this->program_id, frag);
+    glDeleteShader(vert);
+    glDeleteShader(frag);
 }
 
 void Shader::bind() {
@@ -96,6 +101,8 @@ Shader::~Shader() {
     glDeleteShader(this->program_id);
 }
 
+std::unique_ptr<Shader> GAME_SHADER, TEXT_SHADER;
+
 void Shader::register_uniform(std::string name) {
     int loc = glGetUniformLocation(this->program_id, name.c_str());
     if (loc < 0) {
@@ -108,17 +115,18 @@ void Shader::set_uniform_value(std::string name, float value) {
     glUniform1f(this->uniforms[name], value);
 }
 
-std::unique_ptr<Shader> GAME_SHADER;
-
 void load_all_shaders() {
     GAME_SHADER = std::make_unique<Shader>(
         "src/gl/shad/basic_vert.glsl", "src/gl/shad/basic_frag.glsl"
     );
-    // More shaders in the future?
+    TEXT_SHADER = std::make_unique<Shader>(
+        "src/gl/shad/basic_vert.glsl", "src/gl/shad/text_frag.glsl"
+    );
 }
 
 void unload_all_shaders() {
     GAME_SHADER->destroy();
+    TEXT_SHADER->destroy();
 }
 
 }

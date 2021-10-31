@@ -7,6 +7,7 @@
 #include <GLFW/glfw3.h>
 
 #include <entity/entity.hpp>
+#include <gl/glad.h>
 #include <gl/mesh.hpp>
 #include <gl/shader.hpp>
 #include <gl/texture.hpp>
@@ -29,6 +30,10 @@ Application::Application()
 }
 
 void Application::mainloop() {
+
+    gl::Font font{"res/fonts/Arial.ttf"};
+    gl::TextLabel label{"Hello World!", font};
+    labels.push_back(&label);
 
     while (wn.is_open() && this->running) {
 
@@ -89,7 +94,11 @@ void Application::close() {
 
 void Application::update_size(GLFWwindow * window, int width, int height) {
     // Update the shader uniform for size
-    gl::GAME_SHADER->set_uniform_value("ratio", ((float) width) / ((float) height));
+    auto ratio = ((float) width) / ((float) height);
+    gl::GAME_SHADER->bind();
+    gl::GAME_SHADER->set_uniform_value("ratio", ratio);
+    gl::TEXT_SHADER->bind();
+    gl::TEXT_SHADER->set_uniform_value("ratio", ratio);
     // Redraw the screen so it doesn't stall.
     this->redraw();
 }
@@ -98,6 +107,8 @@ void Application::redraw() {
         
     wn.clear();
 
+    gl::GAME_SHADER->bind();
+
     tex::render_texture(
         0, 0, 2, 2, tex::RenderBasis::MID, tex::RenderBasis::MID,
         tex::GROUND_TEX.get()
@@ -105,6 +116,11 @@ void Application::redraw() {
     
     for (auto entity : ent::g_entities) {
         entity->render();
+    }
+
+    gl::TEXT_SHADER->bind();
+    for (auto label : labels) {
+        label->draw(0, 0, 0.4, 0.4);
     }
 
     wn.render();
@@ -133,9 +149,16 @@ void Application::init_callbacks() {
 }
 
 void Application::init_game() {
+
     new ent::Player(0.0f, FLOOR_HEIGHT, this);
+
     gl::GAME_SHADER->bind();
     gl::GAME_SHADER->register_uniform("ratio");
+
+    gl::TEXT_SHADER->bind();
+    gl::TEXT_SHADER->register_uniform("ratio");
+
+    glEnable(GL_BLEND);
 
     // Update size
     int w, h;
@@ -143,6 +166,7 @@ void Application::init_game() {
     this->update_size(this->wn.wn, w, h);
 
     util::log("Teo was here!", util::Severity::NORMAL);
+
 }
 
 void Application::exit_game() {

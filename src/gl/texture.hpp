@@ -17,8 +17,14 @@ class Texture {
     // The OpenGL ID assigned to this texture.
     unsigned id;
 
+protected:
+    // Load a buffer of width w and height h, of format f, into a GL texture and
+    // return the ID.
+    static unsigned load(const unsigned char* buffer, int w, int h, int f);
+
 public:
     Texture(std::string filename);
+    Texture() = default;
    ~Texture();
     void bind(); // Make this the currently drawn texture
     void unbind(); // Shouldn't need to be used often, actually

@@ -5,7 +5,10 @@
 
 #pragma once
 
+#include <vector>
+
 #include <entity/player.hpp>
+#include <gl/text.hpp>
 #include <gl/window.hpp>
 
 const extern int FRAMERATE;
@@ -33,6 +36,9 @@ private:
 
     // For cleanly shutting down the game
     bool running = true;
+
+    // All labels (hacky - TOFIX)
+    std::vector<gl::TextLabel*> labels;
 
 public:
     Application();

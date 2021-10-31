@@ -15,19 +15,29 @@ Texture::Texture(std::string name) {
     auto data = stbi_load(name.c_str(), &w, &h, &channels, 0);
     if (!data)
         ; // TODO - error out
-    
-    glGenTextures(1, &this->id);
-    this->bind();
+
+    this->id = load(data, w, h, GL_RGBA);
+
+    stbi_image_free(data);
+
+}
+
+unsigned Texture::load(const unsigned char* buffer, int w, int h, int f) {
+
+    unsigned ret;
+
+    glGenTextures(1, &ret);
+    glBindTexture(GL_TEXTURE_2D, ret);
 
     // It's a pixel art game, we don't want the textures to appear blurry
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, f, w, h, 0, f, GL_UNSIGNED_BYTE, buffer);
 
     glGenerateMipmap(GL_TEXTURE_2D);
 
-    stbi_image_free(data);
+    return ret;
 
 }
 
